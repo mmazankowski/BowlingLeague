@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Bowler>
+
+<h1>Bowlers</h1>
+<a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="BowlerForm">Add Bowler</a>
+
+<div class="line">
+
+    <table class="table table-bordered table-striped">
+        <thead class="font-weight-bold">
+            <tr>
+                <td>First Name</td>
+                <td>Middle Initial</td>
+                <td>Last Name</td>
+                <td>Address</td>
+                <td>City</td>
+                <td>State</td>
+                <td>Zip</td>
+                <td>Phone Number</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var b in Model)
+            {
+            <tr>
+                <td>@b.BowlerFirstName</td>
+                <td>@b.BowlerMiddleInit</td>
+                <td>@b.BowlerLastName</td>
+                <td>@b.BowlerAddress</td>
+                <td>@b.BowlerCity</td>
+                <td>@b.BowlerState</td>
+                <td>@b.BowlerZip</td>
+                <td>@b.BowlerPhoneNumber</td>
+
+                <td><a class="btn btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@b.BowlerID">Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@b.BowlerID">Delete</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

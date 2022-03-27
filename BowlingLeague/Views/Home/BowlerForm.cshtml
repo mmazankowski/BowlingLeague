@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Bowler Form";
+}
+
+@model BowlingLeague.Models.Bowler
+
+<style>
+    .form-element label {
+        display: inline-block;
+        width: 150px;
+    }
+</style>
+
+<div>
+    <h1>Add a Bowler</h1>
+
+    <form method="post">
+
+        <input type="hidden" id="BowlerID" asp-for="BowlerID" />
+
+        <div class="form-element">
+            <label asp-for="BowlerFirstName">First Name</label>
+            <input asp-for="BowlerFirstName" />
+            <br />
+        </div>
+        <br />
+
+        <div class="form-element">
+            <label asp-for="BowlerMiddleInit">Middle Initial</label>
+            <input asp-for="BowlerMiddleInit" />
+            <br />
+        </div>
+        <br />
+
+
+        <div class="form-element">
+            <label asp-for="BowlerLastName">Last Name</label>
+            <input asp-for="BowlerLastName" />
+            <br />
+        </div>
+        <br />
+
+        <div class="form-element">
+            <label asp-for="BowlerAddress">Address</label>
+            <input asp-for="BowlerAddress" />
+            <br />
+        </div>
+        <br />
+
+        <div class="form-element">
+            <label asp-for="BowlerCity">City</label>
+            <input asp-for="BowlerCity" />
+            <br />
+        </div>
+        <br />
+
+        <div class="form-element">
+            <label asp-for="BowlerState">State</label>
+            <input asp-for="BowlerState" />
+            <br />
+        </div>
+        <br />
+
+        <div class="form-element">
+            <label asp-for="BowlerZip">Zip</label>
+            <input asp-for="BowlerZip" />
+            <br />
+        </div>
+        <br />
+
+        <div class="form-element">
+            <label asp-for="BowlerPhoneNumber">Phone Number</label>
+            <input asp-for="BowlerPhoneNumber" />
+            <br />
+        </div>
+        <br />
+
+        <button class="btn btn-primary" type="submit">Add Bowler</button>
+        <div asp-validation-summary="All"></div>
+    </form>
+</div>
