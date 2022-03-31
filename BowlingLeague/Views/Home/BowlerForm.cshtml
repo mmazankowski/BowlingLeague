@@ -15,7 +15,7 @@
     <h1>Add a Bowler</h1>
 
     <form method="post">
-
+        <div asp-validation-summary="All" class="text-danger"></div>
         <input type="hidden" id="BowlerID" asp-for="BowlerID" />
 
         <div class="form-element">
@@ -75,7 +75,18 @@
         </div>
         <br />
 
+        <div class="form-element">
+            <label asp-for="TeamID">Team</label>
+            <select asp-for="TeamID">
+                @foreach (Team t in ViewBag.Teams)
+                {
+                    <option value="@t.TeamID">@t.TeamName</option>
+                }
+            </select><br />
+        </div>
+        <br />
+
         <button class="btn btn-primary" type="submit">Add Bowler</button>
-        <div asp-validation-summary="All"></div>
+
     </form>
 </div>

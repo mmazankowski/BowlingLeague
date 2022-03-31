@@ -51,9 +51,12 @@ namespace BowlingLeague.Controllers
         //    return View(bowlers);
         //}
 
+        // Add a Bowler
         [HttpGet]
         public IActionResult BowlerForm()
         {
+            ViewBag.Teams = _repo.Teams.ToList();
+
             return View(); 
         }
 
@@ -65,16 +68,17 @@ namespace BowlingLeague.Controllers
                 _repo.Add(b);
                 _repo.SaveChanges();
 
-                return View("Index");
+                return View("Index", b); //potential take out the b
             }
             else // If Invalid 
             {
-                ViewBag.Bowlers = _repo.Bowlers.ToList();
+                ViewBag.Teams = _repo.Teams.ToList();
 
                 return View();
             }
         }
 
+        // Edit a Bowler
         [HttpGet]
         public IActionResult Edit(int bowlerid)
         {
@@ -97,5 +101,23 @@ namespace BowlingLeague.Controllers
         //var someData = context.Bowlers.Include(x => "Team").ToList();
         //return View(someData); (referring to whatever isi in the context file)
 
+        // Delete a Bowler
+        [HttpGet]
+        public IActionResult Delete(int bowlerid)
+        {
+            var bowler = _repo.Bowlers.Single(b => b.BowlerID == bowlerid);
+
+            return View(bowler); 
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Bowler b)
+        {
+            _repo.Update(b);
+            _repo.SaveChanges(); 
+
+            return RedirectToAction("Index");
+
+        }
     }
 }
