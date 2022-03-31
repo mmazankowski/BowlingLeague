@@ -7,6 +7,8 @@ namespace BowlingLeague.Models
     {
         IQueryable<Bowler> Bowlers { get; }
 
+        IQueryable<Team> Teams { get; }
+
         public void Save(Bowler b);
 
         public void Add(Bowler b);

@@ -14,7 +14,7 @@ namespace BowlingLeague.Controllers
     {
         //private BowlingLeagueDbContext _context { get; set; }
 
-        private IBowlingLeagueRepository _repo { get; set; }
+        private BowlingLeagueDbContext _repo { get; set; }
 
         //Constructor 
         //public HomeController(BowlingLeagueDbContext temp)
@@ -22,20 +22,34 @@ namespace BowlingLeague.Controllers
         //    _context = temp; 
         //}
 
-        public HomeController(IBowlingLeagueRepository temp)
+        public HomeController(BowlingLeagueDbContext temp)
         {
             _repo = temp;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string team)
         {
-            var blah = _repo.Bowlers // if using repo method do _repo.Bowlers here, use _context if not 
-                //.Include(x => Team)
-                //.FromSqlRaw("SELECT * FROM Bowlers") // can build the output with a sql statement 
+            var teams = _repo.Teams.ToList();
+
+            var bowlers = _repo.Bowlers // if using repo method do _repo.Bowlers here, use _context if not 
+                .Include(x => x.Team)
+                //.FromSqlRaw("SELECT * FROM Bowlers") // can build the output with a sql statement
+                .Where(x => x.Team.TeamName == team || team == null)
+                .OrderBy(x => x.TeamID)
                 .ToList(); 
 
-            return View(blah);
+            return View(bowlers);
         }
+
+        //public IActionResult Index()
+        //{
+        //    List<Team> teams = _repo.Teams.ToList();
+
+        //    List<Bowler> bowlers = _repo.Bowlers
+        //        .OrderBy(x => x.TeamId)
+        //        .ToList();
+        //    return View(bowlers);
+        //}
 
         [HttpGet]
         public IActionResult BowlerForm()
@@ -80,6 +94,8 @@ namespace BowlingLeague.Controllers
             return RedirectToAction("Index");
         }
 
+        //var someData = context.Bowlers.Include(x => "Team").ToList();
+        //return View(someData); (referring to whatever isi in the context file)
 
     }
 }

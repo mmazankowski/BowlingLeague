@@ -25,6 +25,8 @@ namespace BowlingLeague.Models
 
         public string BowlerPhoneNumber { get; set; }
 
+        //Foreign Key
         public int TeamID { get; set; }
+        public Team Team { get; set; }
     }
 }

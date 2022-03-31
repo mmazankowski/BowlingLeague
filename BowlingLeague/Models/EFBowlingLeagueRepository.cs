@@ -14,6 +14,8 @@ namespace BowlingLeague.Models
 
         public IQueryable<Bowler> Bowlers => _repo.Bowlers;
 
+        public IQueryable<Team> Teams => _repo.Teams; 
+
 
         public void Save(Bowler b)
         {
